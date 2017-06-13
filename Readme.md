@@ -7,8 +7,8 @@ This is a single-page application featuring a map of our neighborhood.
 # Main File
 
 - index.html : main html page
-- app.js : javascript file
-- styles.css : style sheet
+- js/app.js : javascript file
+- css/styles.css : style sheet
 
 
 # Used Framework
