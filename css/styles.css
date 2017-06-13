@@ -4,8 +4,8 @@
 }
 
 a:hover, a:visited, a:link, a:active, a:focus {
-    color: #FFFFFF !important;
-    text-decoration: none !important;
+    color: #FFFFFF;
+    text-decoration: none;
 }
 
 /*navbar header*/
@@ -91,9 +91,9 @@ Reference
     padding: 2em;
 }
 
-.article > a:hover, a:visited, a:link, a:active, a:focus {
-    color: #111 !important;
-    text-decoration: underline !important;
+.article ~ a:hover, a:visited, a:link, a:active, a:focus {
+    color: #111;
+    text-decoration: underline;
     line-height: 15px;
 }
 
