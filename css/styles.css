@@ -1,0 +1,129 @@
+* {
+/*  border: 1px solid yellow;*/
+    font-style: Tahoma, Geneva, sans-serif;
+}
+
+a:hover, a:visited, a:link, a:active, a:focus {
+    color: #FFFFFF !important;
+    text-decoration: none !important;
+}
+
+/*navbar header*/
+.container-fluid {
+    background: #111;
+}
+
+/*
+Reference
+  1) Pure CSS off-screen Navigation Menu
+    https://www.sitepoint.com/pure-css-off-screen-navigation-menu
+  2) Shrink Width to Collaspe Sidebar
+    https://www.bootply.com/88026#
+  3) Creating Off-canvas Push/Reveal/Overlay
+    http://www.jqueryscript.net/menu/Creating-Off-canvas-Push-Reveal-Overlay-Menus-with-jQuery-jQPanels.html
+*/
+
+/*styling the navigation menu and items*/
+.navigation {
+    background: #111;
+    color: #fff;
+    /*width: 180px;*/
+    width: 20%;
+    height:100%;
+    position: fixed;
+    top:50px;
+    right:0;
+    bottom: 0;
+    left:0;
+    /*navigation menu is behind page content*/
+/*    z-index: 1;*/
+    padding: 1.5em;
+    line-height: 35px;
+}
+.navigation.active {
+
+}
+.navigation input {
+    /*center*/
+    margin: auto;
+    display: block;
+    /*size*/
+    line-height: 30px;
+    width: 80%;
+    color: #111;
+    padding-left: 15px;
+    /*round style*/
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    outline: none;
+}
+.navigation ul {
+    margin-top: 20px;
+}
+.navigation li {
+    /*size*/
+    line-height: 50px;
+    width: 90%;
+    /*style*/
+    padding-left: 10px;
+    list-style: none;
+}
+
+.site-wrap {
+    /*the site's content completely covers the menu*/
+    /*min-width: 100%;*/
+    /*min-height: 100%;*/
+    width: 100%;
+/*    width: 100%;
+    height: 100%;*/
+    background-color: #fff;
+    /*position: relative;*/
+    position: absolute;
+    /*top: 0;*/
+    top: 50px;
+    /*bottom: 100%;*/
+    bottom: 0px;
+    right: 0px;
+    left: 0;
+    z-index: 0;
+    /*previous*/
+    padding: 2em;
+}
+
+.article > a:hover, a:visited, a:link, a:active, a:focus {
+    color: #111 !important;
+    text-decoration: underline !important;
+    line-height: 15px;
+}
+
+/*add the styles that change the menu trigger
+from a standard checkbox input inot the classic hamburger icon*/
+.nav-trigger {
+    position: absolute;
+    /*display: block; iOS crash -> clip() */
+    clip: rect(0, 0, 0, 0);
+}
+/*style the label element*/
+label[for="nav-trigger"] {
+    position: fixed;    /*stays in the same spot*/
+    top: 15px;  /*how far from the edge of the view port the icon*/
+    left: 20%; /*how far from the edge of the view port the icon*/
+    z-index: 2; /*make sure the trigger's z-index is at least one higher than .site-wrap*/
+    /*make the label inot a "hamburger" icon*/
+    width: 20px;
+    height: 20px;
+    cursor: pointer;    /*to visually indicate interactiveity with cursor-based input*/
+    /*inline SVG*/
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect style='stroke:#006600; fill: #FFFFFF;' width='30' height='6'/><rect y='24' style='stroke:#006600; fill: #FFFFFF;' width='30' height='6'/><rect y='12' style='stroke:#006600; fill: #FFFFFF;' width='30' height='6'/></svg>");
+    background-size: contain;
+}
+
+/*make the tigger work*/
+.nav-trigger:checked ~ .navigation {
+    z-index: 1;
+}
+
+.nav-trigger:not(:checked) ~ .navigation {
+    z-index: -1;
+}
