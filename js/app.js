@@ -1,10 +1,9 @@
-
 var map;
 var centerLocation = {
 	zoom: 13, location: { lat: 40.7413549, lng: -73.9980244}
-}
-var $nyTimesArticle="https://api.nytimes.com/svc/search/v2/articlesearch.json";
-var $nyTimesKey="f6f3ef39721041c1b8d1bacdaad183ec";
+};
+var nyTimesArticle="https://api.nytimes.com/svc/search/v2/articlesearch.json";
+var nyTimesKey="f6f3ef39721041c1b8d1bacdaad183ec";
 
 var dataLocation = [
 	{ title: 'Park Ave Penthouse', location: {lat: 40.7713024,lng: -73.9632393} },
@@ -12,16 +11,16 @@ var dataLocation = [
 	{ title: 'Union Square Open Floor Plan', location: { lat: 40.7347062, lng: -73.9895759 } },
 	{ title: 'East Village Hip Studio',	location: {	lat: 40.7281777, lng: -73.984377 } },
 	{ title: 'Chinatown Homey Space', location: { lat: 40.7180628, lng: -73.9961237 } }
-]
+];
 
 //Function to retrieve data from New York Times
 var getNYTimes = function(marker,infoWindow) {
 
-	$nyTimesArticle += '?' + $.param({ 'q': marker.title });
-	$nyTimesArticle += '&' + $.param({ 'sort': 'newest' });
-	$nyTimesArticle += '&' + $.param({ 'api-key': $nyTimesKey });
+	nyTimesArticle += '?' + $.param({ 'q': marker.title });
+	nyTimesArticle += '&' + $.param({ 'sort': 'newest' });
+	nyTimesArticle += '&' + $.param({ 'api-key': nyTimesKey });
 
-	var nytimesUrl = $nyTimesArticle ;
+	var nytimesUrl = nyTimesArticle ;
 
 	var articleContent = '<strong>'+ marker.title+' in NYT article</strong><br>';
 
@@ -31,11 +30,12 @@ var getNYTimes = function(marker,infoWindow) {
 	}).done(function(data) {
 		console.log(data);
 		var articles = data.response.docs;
+    var art = '';
 		console.log(articles.length);
 		if (articles.length !==0) {
 			for(var i=0 ; i<articles.length; i++) {
 				var article = articles[i];
-				var art = '<li class="article"><a href="'+ article.web_url +'">'+
+				art = '<li class="article"><a href="'+ article.web_url +'">'+
 						article.headline.main+'</a></li>';
 				articleContent = articleContent.concat(art);
 			}
@@ -86,7 +86,7 @@ var LocationMarker = function(data) {
 			console.log("true marker:" + marker.title);
 			marker.setMap(map);
 		} else {
-			console.log("false marker:" + marker.title)
+			console.log("false marker:" + marker.title);
 			marker.setMap(null);
 		}
 	});
@@ -95,9 +95,9 @@ var LocationMarker = function(data) {
 	this.popInfoWin = function() {
 		getNYTimes(marker, infoWindow);
 		//populateInfoWindow(marker,infoWindow,content);
-	}
+	};
 
-}
+};
 
 // This function populates the infowindow when the marker is clicked
 function populateInfoWindow(marker, infowindow, content) {
@@ -111,7 +111,7 @@ function populateInfoWindow(marker, infowindow, content) {
 
 		// Make sure the marker property is cleared if the infowindow is closed
 		infowindow.addListener('closeclick', function() {
-			var self = this
+			var self = this;
 			if ( marker.getAnimation() !== null)
 				self.marker.setAnimation(null);
 			self.marker = null;
@@ -147,7 +147,7 @@ var ViewModel = function() {
 
     self.filteredMarkerList = ko.computed(function() {
     	var filter = self.filterText().toLowerCase();
-    	if(!filter || 0 == filter.length ) {
+    	if(!filter || 0 === filter.length ) {
     		ko.utils.arrayFilter(self.markerList(), function(item) {
     			item.isSameWithFilter(true);
     			self.bounds.extend(item.lmPosition);
@@ -176,7 +176,7 @@ var ViewModel = function() {
 	// 	self.currentLocation(clickedLocation);
 	// }
 	map.fitBounds(self.bounds);
-}
+};
 
 
 function initMap() {
