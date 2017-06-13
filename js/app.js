@@ -23,7 +23,7 @@ var getNYTimes = function(marker,infoWindow) {
 
 	var nytimesUrl = $nyTimesArticle ;
 
-	var articleContent = '<div><strong>'+ marker.title+' in NYT article</strong></div><br>';
+	var articleContent = '<strong>'+ marker.title+' in NYT article</strong><br>';
 
 	console.log(nytimesUrl);
 
