@@ -156,7 +156,6 @@ var ViewModel = function() {
     			item.isSameWithFilter(true);
     			self.bounds.extend(item.lmPosition);
     		});
-    		map.fitBounds(self.bounds);
     		return self.markerList();
     	} else {
 			return ko.utils.arrayFilter(self.markerList(), function(item) {
@@ -169,13 +168,14 @@ var ViewModel = function() {
 					item.isSameWithFilter(false);
 					isTrue = false;
 				}
-				map.fitBounds(self.bounds);
 				return isTrue;
 			});
     	}
     }, self);
 
-	map.fitBounds(self.bounds);
+    google.maps.event.addDomListener(window,'resize', function() {
+		map.fitBounds(self.bounds);
+    })
 };
 
 

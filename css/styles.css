@@ -1,20 +1,31 @@
 * {
-/*  border: 1px solid yellow;*/
+    /*border: 0.1em solid yellow;*/
     font-style: Tahoma, Geneva, sans-serif;
 }
 
+
 /*https://developers.google.com/maps/documentation/javascript/tutorial*/
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
 }
+
+
 #map {
     height: 100%;
 }
-a:hover, a:visited, a:link, a:active, a:focus {
+
+
+a:hover,
+a:visited,
+a:link,
+a:active,
+a:focus {
     text-decoration: none;
 }
+
 
 /*navbar header*/
 .container-fluid {
@@ -31,10 +42,12 @@ Reference
     http://www.jqueryscript.net/menu/Creating-Off-canvas-Push-Reveal-Overlay-Menus-with-jQuery-jQPanels.html
 */
 
+
 /*styling the navigation menu and items*/
 .navbar-brand {
     color: #fff;
 }
+
 
 .navigation {
     background: #111;
@@ -53,30 +66,19 @@ Reference
     line-height: 35px;
 }
 
-.navigation input {
-    /*center*/
-    margin: auto;
-    display: block;
-    /*size*/
-    line-height: 1.5em;
-    width: 90%;
-    color: #111;
-    padding-left: 1em;
-    /*round style*/
-    -webkit-border-radius: 0.5em;
-    -moz-border-radius: 0.5em;
-    border-radius: 0.5em;
-    outline: none;
-}
 
 @media screen and (max-width: 740px) {
+    .navbar-brand {
+    }
     .navigation {
+        width: 60%;
     }
     .navigation input {
     }
     .navigation ul {
     }
     .navigation li {
+        font-size: 0.9em;
     }
     .site-wrap {
     }
@@ -84,17 +86,39 @@ Reference
     }
 }
 
-.navigation ul {
-    margin-top: 1em;
+
+.navigation input {
+    /*center*/
+    margin: auto;
+    display: block;
+    /*size*/
+    line-height: 1.5em;
+    width: 100%;
+    color: #111;
+    padding: 0;
+    /*round style*/
+    -webkit-border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    border-radius: 0.5em;
+    outline: none;
 }
+
+
+.navigation ul {
+    margin: 0;
+    padding: 0;
+}
+
+
 .navigation li {
     /*size*/
     line-height: 3em;
     width: 100%;
+    padding-left: -1em;
     /*style*/
-    padding-left: 0;
     list-style: none;
 }
+
 
 .site-wrap {
     /*the site's content completely covers the menu*/
@@ -117,24 +141,32 @@ Reference
     padding: 2em;
 }
 
-div > a:hover, a:visited, a:link, a:active, a:focus {
+
+div > a:hover,
+a:visited,
+a:link,
+a:active,
+a:focus {
     color: #ddd;
     text-decoration: none;
     line-height: 2em;
 }
 
-/*add the styles that change the menu trigger
+
+/* Add the styles that change the menu trigger
 from a standard checkbox input inot the classic hamburger icon*/
 .nav-trigger {
     position: absolute;
     /*display: block; iOS crash -> clip() */
     clip: rect(0, 0, 0, 0);
 }
+
+
 /*style the label element*/
 label[for="nav-trigger"] {
     position: fixed;    /*stays in the same spot*/
     top: 1em;  /*how far from the edge of the view port the icon*/
-    left: 30%; /*how far from the edge of the view port the icon*/
+    left: 90%; /*how far from the edge of the view port the icon*/
     z-index: 2; /*make sure the trigger's z-index is at least one higher than .site-wrap*/
     /*make the label inot a "hamburger" icon*/
     width: 1.5em;
@@ -145,10 +177,12 @@ label[for="nav-trigger"] {
     background-size: contain;
 }
 
+
 /*make the tigger work*/
 .nav-trigger:checked ~ .navigation {
     z-index: 1;
 }
+
 
 .nav-trigger:not(:checked) ~ .navigation {
     z-index: -1;
