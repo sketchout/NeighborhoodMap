@@ -78,14 +78,8 @@ var LocationMarker = function(data) {
 		animation: google.maps.Animation.DROP,
 	});
 
-	// var content='<div><strong>'+this.lmTitle+'</strong></div>';
-	// content += '<br> GeoLocation (' + this.lmPosition.lat;
-	// content += ', '+ this.lmPosition.lat +')<br>'  ;
-
 	marker.addListener('click', function() {
-
 		getNYTimes(marker, infoWindow);
-		// populateInfoWindow(this, infoWindow, content);
 	});
 
 	this.isSameWithFilter.subscribe(function(state) {
@@ -101,7 +95,6 @@ var LocationMarker = function(data) {
 
 	this.popInfoWin = function() {
 		getNYTimes(marker, infoWindow);
-		//populateInfoWindow(marker,infoWindow,content);
 	};
 
 };
@@ -177,10 +170,6 @@ var ViewModel = function() {
     	}
     }, self);
 
-	// this.currentLocation = ko.observable(this.markerList()[0].marker.position);
-	// this.setLocation = function(clickedLocation) {
-	// 	self.currentLocation(clickedLocation);
-	// }
 	map.fitBounds(self.bounds);
 };
 
