@@ -16,40 +16,47 @@ var dataLocation = [
 //Function to retrieve data from New York Times
 var getNYTimes = function(marker,infoWindow) {
 
-	nyTimesArticle += '?' + $.param({ 'q': marker.title });
-	nyTimesArticle += '&' + $.param({ 'sort': 'newest' });
-	nyTimesArticle += '&' + $.param({ 'api-key': nyTimesKey });
+	var content = '<strong>'+ marker.title+'</strong> in NYT article<br>';
 
-	var nytimesUrl = nyTimesArticle ;
-
-	var articleContent = '<strong>'+ marker.title+' in NYT article</strong><br>';
-
-	console.log(nytimesUrl);
-
-	$.getJSON( nytimesUrl, {
-	}).done(function(data) {
-		console.log(data);
-		var articles = data.response.docs;
-    var art = '';
-		console.log(articles.length);
-		if (articles.length !==0) {
-			for(var i=0 ; i<articles.length; i++) {
-				var article = articles[i];
-				art = '<li class="article"><a href="'+ article.web_url +'">'+
-						article.headline.main+'</a></li>';
-				articleContent = articleContent.concat(art);
+	console.log(nyTimesArticle);
+	// ref: https://stackoverflow.com/questions/32133078/new-york-times-api-ajax-jquery-call
+	$.ajax({
+		type: 'GET',
+		url: nyTimesArticle,
+		data: {
+			'q' : marker.title,
+			'response-format': "jsonp",
+			'api-key': nyTimesKey,
+			'callback' : 'svc_search_v2_articlesearch'
+		},
+		success: function(data, textStats, XMLHttpRequest) {
+			console.log('\nSUCCESS');
+			console.log(data);
+			var articles = data.response.docs;
+			var aItem = '';
+			console.log(articles.length);
+			if (articles.length !==0) {
+				for(var i=0 ; i<articles.length; i++) {
+					var article = articles[i];
+					aItem = '<li class="article"><a href="'+ article.web_url +'">'+
+							article.headline.main+'</a></li>';
+					content = content.concat(aItem);
+				}
+			} else {
+				aItem = '<p class="article">No Articles found on'+ marker.title +'</p>';
+				content = content.concat(aItem);
 			}
-		} else {
-			art = '<p class="article">No Articles found on'+ marker.title +'</p>';
-			articleContent = articleContent.concat(art);
+			console.log('content :' + content);
+			infoWindow.setContent(content);
+			populateInfoWindow(marker, infoWindow);
+		},
+		error: function(jqXHR, error, errorThrown) {
+			console.log('\nFAIL');
+			content += 'could not be loaded';
+			console.log('content :' + content);
+			infoWindow.setContent(content);
+			populateInfoWindow(marker, infoWindow);
 		}
-		console.log(articleContent);
-		populateInfoWindow(marker, infoWindow, articleContent);
-	}).fail( function() {
-		//$('#nyt-header').text('New York Times article could not be loaded');
-		articleContent += 'could not be loaded';
-		console.log(articleContent);
-		populateInfoWindow(marker, infoWindow, articleContent);
 	});
 };
 
@@ -100,12 +107,11 @@ var LocationMarker = function(data) {
 };
 
 // This function populates the infowindow when the marker is clicked
-function populateInfoWindow(marker, infowindow, content) {
+function populateInfoWindow(marker, infowindow) {
 
 	// Check to make sure the infowindow is not already opened
 	if ( infowindow.maker != marker ) {
 		infowindow.marker = marker;
-		infowindow.setContent(content);
 		infowindow.open(map, marker);
 		infowindow.marker.setAnimation(google.maps.Animation.BOUNCE);
 

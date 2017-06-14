@@ -23,6 +23,9 @@ Reference
 */
 
 /*styling the navigation menu and items*/
+.navbar-brand {
+    color: #fff;
+}
 .navigation {
     background: #111;
     color: #fff;
