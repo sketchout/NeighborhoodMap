@@ -4,6 +4,11 @@
 This is a single-page application featuring a map of our neighborhood.
 
 
+# Quick Start
+
+1. Download or Clone this repository
+2. Open index.html in web browser
+
 # Main File
 
 - index.html : main html page

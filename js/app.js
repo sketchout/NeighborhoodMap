@@ -16,7 +16,7 @@ var dataLocation = [
 //Function to retrieve data from New York Times
 var getNYTimes = function(marker,infoWindow) {
 
-	var content = '<strong>'+ marker.title+'</strong> in NYT article<br>';
+	var content = '<strong>'+ marker.title+'</strong> in NY Times<br>';
 
 	console.log(nyTimesArticle);
 	// ref: https://stackoverflow.com/questions/32133078/new-york-times-api-ajax-jquery-call
@@ -30,30 +30,25 @@ var getNYTimes = function(marker,infoWindow) {
 			'callback' : 'svc_search_v2_articlesearch'
 		},
 		success: function(data, textStats, XMLHttpRequest) {
-			console.log('\nSUCCESS');
-			console.log(data);
 			var articles = data.response.docs;
 			var aItem = '';
-			console.log(articles.length);
 			if (articles.length !==0) {
 				for(var i=0 ; i<articles.length; i++) {
+					if (i == 5) break;
 					var article = articles[i];
 					aItem = '<li class="article"><a href="'+ article.web_url +'">'+
-							article.headline.main+'</a></li>';
+							article.headline.main.substring(1,24)+' ... </a></li>';
 					content = content.concat(aItem);
 				}
 			} else {
 				aItem = '<p class="article">No Articles found on'+ marker.title +'</p>';
 				content = content.concat(aItem);
 			}
-			console.log('content :' + content);
 			infoWindow.setContent(content);
 			populateInfoWindow(marker, infoWindow);
 		},
 		error: function(jqXHR, error, errorThrown) {
-			console.log('\nFAIL');
 			content += 'could not be loaded';
-			console.log('content :' + content);
 			infoWindow.setContent(content);
 			populateInfoWindow(marker, infoWindow);
 		}
@@ -76,7 +71,11 @@ var LocationMarker = function(data) {
 		title: this.lmTitle,
 		map: map,
 		animation: google.maps.Animation.DROP,
-	});
+	}, function(results, status) {
+    	if (status != 'OK') {
+    		alert('Marker creating failed with the following reason:' + status);
+    	}
+    });
 
 	marker.addListener('click', function() {
 		getNYTimes(marker, infoWindow);
@@ -133,13 +132,19 @@ var ViewModel = function() {
 			lng: centerLocation.location.lng
 		},
 		zoom: centerLocation.zoom
+    }, function(results, status) {
+    	if (status != 'OK') {
+    		alert('Map Loadings failed with the following reason:' + status);
+    	}
     });
 
 	// initialzie markerList
 	self.markerList = ko.observableArray([]);
 	dataLocation.forEach(function(dataItem) {
+
 		// Push the marker to array of markers
 		self.markerList.push(new LocationMarker(dataItem));
+
 		self.bounds.extend(dataItem.location);
 	});
 
