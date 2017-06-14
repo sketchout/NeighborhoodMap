@@ -175,7 +175,7 @@ var ViewModel = function() {
 
     google.maps.event.addDomListener(window,'resize', function() {
 		map.fitBounds(self.bounds);
-    })
+    });
 };
 
 
