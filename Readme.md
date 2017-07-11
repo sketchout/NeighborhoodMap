@@ -4,31 +4,34 @@
 This is a single-page application featuring a map of our neighborhood.
 
 
-# Quick Start
+Quick Start
+-----------
 
 1. Download or Clone this repository
 2. Open index.html in web browser
 
-# Main File
+Core File
+---------
 
 - index.html : main html page
 - js/app.js : javascript file
 - css/styles.css : style sheet
 
 
-# Used Framework
+Used Framework
+--------------
 
     - knockout, Simplify dynamic JavaScript UIs with MVVM pattern
-    - HomePage : http://knockoutjs.com/
+        - url : http://knockoutjs.com/
 
 
-# Used Map API
-
+Used Map API
+------------
     - Google Maps API, The best of Google's Powerful Mapping for business
-    - HomePage : https://enterprise.google.com/maps/
+        - url : https://enterprise.google.com/maps/
 
 
-# Used News API
-
+Used News API
+-------------
     - The New York Times, Developer Network
-    - HomePage : https://developer.nytimes.com
+        - url : https://developer.nytimes.com
