@@ -21,17 +21,19 @@ Core File
 Used Framework
 --------------
 
-    - knockout, Simplify dynamic JavaScript UIs with MVVM pattern
-        - url : http://knockoutjs.com/
+- knockout, Simplify dynamic JavaScript UIs with MVVM pattern
+    - url : http://knockoutjs.com/
 
 
 Used Map API
 ------------
-    - Google Maps API, The best of Google's Powerful Mapping for business
-        - url : https://enterprise.google.com/maps/
+
+- Google Maps API, The best of Google's Powerful Mapping for business
+    - url : https://enterprise.google.com/maps/
 
 
 Used News API
 -------------
-    - The New York Times, Developer Network
-        - url : https://developer.nytimes.com
+
+- The New York Times, Developer Network
+    - url : https://developer.nytimes.com
